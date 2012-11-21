@@ -1,0 +1,3 @@
+#!/bin/sh
+cp $CHEF_DIR/knife.rb.$1 $HOME/.chef/knife.rb
+cat $HOME/.chef/knife.rb

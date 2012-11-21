@@ -1,0 +1,24 @@
+#!/bin/bash
+
+MODULE=''
+
+if [ $# -gt 0 ]; then
+	MODULE=$1	
+fi
+
+$CATALINA_HOME/bin/shutdown.sh
+rm -r $HOME/.motech/bundles/*
+
+cd $MOTECH_TRUNK/$MODULE
+mvn clean install -Dmaven.test.skip=true
+
+#sudo service tomcat7 stop
+rm $CATALINA_HOME/webapps/motech-platform-server.war
+rm -r $CATALINA_HOME/webapps/motech-platform-server
+cp $MOTECH_TRUNK/platform/server/target/motech-platform-server.war $CATALINA_HOME/webapps
+
+#sudo service tomcat7 start
+ps aux | grep tomcat | awk '{print $2}' | xargs kill
+$CATALINA_HOME/bin/catalina.sh jpda start
+
+tomcat-restart
