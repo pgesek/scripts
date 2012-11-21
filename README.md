@@ -1,4 +1,4 @@
 scripts
 =======
 
-My scriipts
+My scripts
