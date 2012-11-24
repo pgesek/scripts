@@ -1,0 +1,1 @@
+svn status | grep "^?" | sed "s/?  */svn add /" | bash
