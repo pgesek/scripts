@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "You need pass the name of the openmrs module to intsall"
+	exit 1
+fi
+
+MODULE_DIR="$OPENMRS_MODULE_DIR/openmrs-module-$1"
+
+if [ ! -d "$MODULE_DIR" ]; then
+	echo "$MODULE_DIR does not exist"
+	exit 2
+fi
+
+mvn clean install -f $MODULE_DIR/pom.xml
+cp $MODULE_DIR/omod/target/*.omod $HOME/.OpenMRS/modules
+
+tomcat-restart
+tomcat-log -t
