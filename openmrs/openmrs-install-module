@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# In .bashrc:
+# OPENMRS_MODULE_DIR="<dir where module repos are>"
+
 if [ -z "$1" ]; then
 	echo "You need pass the name of the openmrs module to intsall"
 	exit 1
