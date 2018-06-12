@@ -44,20 +44,44 @@ wtf:
         height: 1
         width: 2
       refreshInterval: 1
-    system:
+
+    cryptolive:
+      colors:
+        from:
+          name: coral
+          displayName: grey
+        to:
+          name: white
+          price: green
+      currencies:
+        BTC:
+          displayName: Bitcoin
+          to:
+            - USD
+            - PLN
+            - ETH
+        ETH:
+          displayName: Ethereum
+          to:
+            - USD
+            - PLN
+            - ETH
+        BCC:
+          displayName: Bitcoin Cash
+          to:
+            - USD
+            - PLN
+            - ETH
+        LTC:
+          displayName: Litecoin
+          to:
+            - USD
+            - PLN
+            - ETH
       enabled: true
       position:
         top: 0
         left: 1
-        height: 1
+        height: 2
         width: 1
-      refreshInterval: 3600
-    textfile:
-      enabled: true
-      filePath: "~/.wtf/config.yml"
-      position:
-        top: 1
-        left: 1
-        height: 1
-        width: 1
-      refreshInterval: 30
+      updateInterval: 60
