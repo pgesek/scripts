@@ -84,4 +84,4 @@ wtf:
         left: 1
         height: 2
         width: 1
-      updateInterval: 60
+      updateInterval: 900
