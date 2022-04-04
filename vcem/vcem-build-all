@@ -1,0 +1,36 @@
+#!/bin/bash
+
+RESET_GIT_TO_LATEST=false
+if [[ $1 == "true" ]]; then
+    RESET_GIT_TO_LATEST=true
+fi
+
+
+function reset_git_to_latest_if_required() {
+    if [[ $RESET_GIT_TO_LATEST == true ]]; then
+        git reset --hard HEAD
+        git pull
+    fi
+}
+
+BASE_DIR="/mnt/hdd/verizon"
+FREEACS_DIR="$BASE_DIR/freeacs"
+NGINX_DIR="$BASE_DIR/nginx"
+MYSQL_DIR="$BASE_DIR/vcem-mysql"
+FLYWAY_DIR="$BASE_DIR/vcem-flyway"
+DATA_DIR="$BASE_DIR/vcem-data"
+
+reset_git_to_latest_if_required
+cd $FREEACS_DIR/scripts
+bash ./docker-build.sh
+
+img_dirs=($NGINX_DIR, $MYSQL_DIR, $FLYWAY_DIR)
+for dir in $img_dirs; do
+    cd $dir
+    reset_git_to_latest_if_required
+    bash ./build.sh
+done
+
+cd $DATA_DIR
+reset_git_to_latest_if_required
+
